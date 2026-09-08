@@ -25,7 +25,7 @@ from torch.utils.data import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments, set_seed
 from transformers.trainer_utils import get_last_checkpoint
 
-from gen_cups import CODE, CONDITIONS, CUPS, chain_metrics, parse_answer, parse_chain
+from gen_cups import CODE, CONDITIONS, CUPS, PLAIN, chain_metrics, parse_answer, parse_chain
 
 
 # ---------------------------------------------------------------- helpers
@@ -123,8 +123,8 @@ def tokcheck(args):
     for s in [" 3", " fine", " swap", "12", "12:", "\n1: fine.", "ball 5"]:
         ids = tok(s, add_special_tokens=False)["input_ids"]
         print(f"  {s!r:14} -> {len(ids)} token(s): {[tok.decode([i]) for i in ids]}")
-    single = all(len(tok(" " + w, add_special_tokens=False)["input_ids"]) == 1 for w in CODE.values())
-    print("  all five slot words single-token with leading space:", single)
+    single = all(len(tok(" " + w, add_special_tokens=False)["input_ids"]) == 1 for w in list(CODE.values()) + list(PLAIN.values()))
+    print("  all ten slot words single-token with leading space:", single)
     rows = read_jsonl(os.path.join(args.data, "train.jsonl"))
     for cond in CONDITIONS:
         longest = max(len(encode_example(tok, r, cond)[0]) for r in rows)

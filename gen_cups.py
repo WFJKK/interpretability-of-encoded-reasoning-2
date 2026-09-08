@@ -12,7 +12,7 @@ Prompt (identical across conditions):
 
 Completions:
     direct   : ball 5
-    plain    : 1: 3.\n2: 5.\n...\nball 5
+    plain    : 1: three.\n2: five.\n...\nball 5
     encoded  : 1: fine.\n2: good.\n...\nball 5       slot word = CODE[state]
     random   : as encoded, slot words uniformly random (the R&G control)
 
@@ -32,6 +32,8 @@ import re
 CUPS = 5
 CODE = {1: "okay", 2: "right", 3: "fine", 4: "sure", 5: "good"}
 INV_CODE = {w: s for s, w in CODE.items()}
+PLAIN = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}  # readable state words, single tokens
+INV_PLAIN = {w: s for s, w in PLAIN.items()}
 CONDITIONS = ("direct", "plain", "encoded", "random")
 
 
@@ -63,7 +65,7 @@ def build_completion(cond, traj, rng=None):
     lines = []
     for k, s in enumerate(traj, 1):
         if cond == "plain":
-            slot = str(s)
+            slot = PLAIN[s]
         elif cond == "encoded":
             slot = CODE[s]
         elif cond == "random":
@@ -106,7 +108,7 @@ def parse_chain(text, cond):
     out = []
     for _, slot in LINE_RE.findall(text):
         if cond == "plain":
-            out.append(int(slot) if slot.isdigit() else None)
+            out.append(INV_PLAIN.get(slot.lower()))
         else:
             out.append(INV_CODE.get(slot.lower()))
     return out
@@ -166,7 +168,7 @@ def main():
     if long:
         write_jsonl(os.path.join(args.out, "test_long.jsonl"), long)
     with open(os.path.join(args.out, "meta.json"), "w") as f:
-        json.dump({"args": vars(args), "cups": CUPS, "code": CODE, "conditions": CONDITIONS}, f, indent=2)
+        json.dump({"args": vars(args), "cups": CUPS, "code": CODE, "plain": PLAIN, "conditions": CONDITIONS}, f, indent=2)
 
     print(f"train {len(train)}  test {len(test)}  long {len(long)}  ->  {args.out}")
     print("example prompt + encoded completion (n=4):")
