@@ -95,3 +95,7 @@ Training notes: transformers 5 (warmup_steps takes a float ratio); Qwen2.5 split
 ## Status
 
 Organism established on GPT-2 small and Qwen2.5-0.5B. Next: mechanistic analysis on the GPT-2 plain and encoded models.
+
+## Models
+
+Final weights (private, Hugging Face): `WFJKK/cups-organism-<model>-<condition>` for model in gpt2, qwen2.5-0.5b and condition in direct, plain, encoded, random; the depth-run direct models are `WFJKK/cups-depth-gpt2` and `WFJKK/cups-depth-qwen2.5-0.5b`. Load with `AutoModelForCausalLM.from_pretrained(repo)`; the GPT-2 ones load into TransformerLens via `HookedTransformer.from_pretrained("gpt2", hf_model=...)`.
