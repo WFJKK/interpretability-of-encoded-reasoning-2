@@ -14,6 +14,7 @@ Notes
 - eval batches examples of equal n, so prompts inside a batch have identical length (no padding)
 """
 import argparse
+import inspect
 import json
 import os
 import sys
@@ -148,6 +149,9 @@ def train(args):
           f"{len(ds)} examples, longest {ds.longest} tokens | eff. batch {eff_batch} | "
           f"{args.epochs} epochs = {steps} optimizer steps")
 
+    # transformers 5 dropped warmup_ratio; warmup_steps takes a float ratio there
+    warm = ({"warmup_ratio": 0.03} if "warmup_ratio" in inspect.signature(TrainingArguments.__init__).parameters
+            else {"warmup_steps": 0.03})
     use_bf16 = device == "cuda" and bf and args.precision in ("auto", "bf16")
     use_fp16 = device == "cuda" and args.precision == "fp16"
     targs = TrainingArguments(
@@ -156,7 +160,7 @@ def train(args):
         gradient_accumulation_steps=args.grad_accum,
         num_train_epochs=args.epochs,
         learning_rate=args.lr,
-        warmup_ratio=0.03,
+        **warm,
         lr_scheduler_type="cosine",
         weight_decay=0.0,
         logging_steps=args.log_steps,
