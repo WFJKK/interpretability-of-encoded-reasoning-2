@@ -144,17 +144,19 @@ def main():
     seen = set()
 
     def fresh(n, idx):
-        while True:
+        row = None
+        for _ in range(200):  # instance space is 5 * 10**n, tiny for n <= 2
             row = make_row(rng, n, idx)
             key = (row["start"], tuple(map(tuple, row["swaps"])))
             if key not in seen:
                 seen.add(key)
                 return row
+        return row  # duplicate; only happens for n <= 2
 
-    # test first so train can never contain a test instance
+    # test first so train can never contain a test instance (n <= 2 excepted, see fresh)
     test = []
     for n in range(args.n_min, args.n_max + 1):
-        for _ in range(args.test_per_n):
+        for _ in range(min(args.test_per_n, 5 * 10 ** n // 2)):
             test.append(fresh(n, len(test)))
     long = [fresh(args.extra_test_n, i) for i in range(args.extra_test_count)] if args.extra_test_n else []
     train = [fresh(rng.randint(args.n_min, args.n_max), i) for i in range(args.num_train)]
