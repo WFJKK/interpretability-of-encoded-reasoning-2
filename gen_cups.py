@@ -34,7 +34,9 @@ CODE = {1: "okay", 2: "right", 3: "fine", 4: "sure", 5: "good"}
 INV_CODE = {w: s for s, w in CODE.items()}
 PLAIN = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}  # readable state words, single tokens
 INV_PLAIN = {w: s for s, w in PLAIN.items()}
-CONDITIONS = ("direct", "plain", "encoded", "random")
+CODE_B = {1: "well", 2: "true", 3: "nice", 4: "cool", 5: "done"}  # second arbitrary code (code control)
+SLOT_MAPS = {"plain": PLAIN, "encoded": CODE, "random": CODE, "encoded_b": CODE_B}
+CONDITIONS = ("direct", "plain", "encoded", "random", "encoded_b")
 
 
 def make_instance(rng, n):
@@ -70,6 +72,8 @@ def build_completion(cond, traj, rng=None):
             slot = CODE[s]
         elif cond == "random":
             slot = CODE[rng.randint(1, CUPS)]
+        elif cond == "encoded_b":
+            slot = CODE_B[s]
         else:
             raise ValueError(cond)
         lines.append(f"{k}: {slot}.")
@@ -105,13 +109,8 @@ def parse_answer(text):
 
 def parse_chain(text, cond):
     """Decode the slot chain 'k: slot.' lines to states (None where undecodable)."""
-    out = []
-    for _, slot in LINE_RE.findall(text):
-        if cond == "plain":
-            out.append(INV_PLAIN.get(slot.lower()))
-        else:
-            out.append(INV_CODE.get(slot.lower()))
-    return out
+    inv = {w: s for s, w in SLOT_MAPS[cond].items()}
+    return [inv.get(slot.lower()) for _, slot in LINE_RE.findall(text)]
 
 
 def chain_metrics(chain, traj):
@@ -168,7 +167,7 @@ def main():
     if long:
         write_jsonl(os.path.join(args.out, "test_long.jsonl"), long)
     with open(os.path.join(args.out, "meta.json"), "w") as f:
-        json.dump({"args": vars(args), "cups": CUPS, "code": CODE, "plain": PLAIN, "conditions": CONDITIONS}, f, indent=2)
+        json.dump({"args": vars(args), "cups": CUPS, "code": CODE, "plain": PLAIN, "code_b": CODE_B, "conditions": CONDITIONS}, f, indent=2)
 
     print(f"train {len(train)}  test {len(test)}  long {len(long)}  ->  {args.out}")
     print("example prompt + encoded completion (n=4):")

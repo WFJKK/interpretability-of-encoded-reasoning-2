@@ -25,7 +25,7 @@ import os
 import random
 import time
 
-from gen_cups import CODE, CUPS, PLAIN, chain_metrics, parse_answer, parse_chain
+from gen_cups import CODE, CUPS, PLAIN, SLOT_MAPS, chain_metrics, parse_answer, parse_chain
 
 NEUTRAL = "ok"
 CONDITIONS_BATTERY = ("full", "no_cot", "neutralise", "scramble", "edit", "horizon")
@@ -35,7 +35,7 @@ HORIZON_MS = (1, 2, 3, 4, 5, 6, 8)
 # ---------------------------------------------------------------- text helpers (no torch)
 
 def slot_map(cond):
-    return PLAIN if cond == "plain" else CODE
+    return SLOT_MAPS[cond]
 
 
 def slot_words(traj, cond):
@@ -226,7 +226,7 @@ def summarise(name, recs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model-path", required=True)
-    ap.add_argument("--condition", choices=["plain", "encoded"], required=True)
+    ap.add_argument("--condition", choices=["plain", "encoded", "encoded_b"], required=True)
     ap.add_argument("--data", required=True)
     ap.add_argument("--test-file", default=None)
     ap.add_argument("--out", required=True)

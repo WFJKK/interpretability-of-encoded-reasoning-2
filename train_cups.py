@@ -25,7 +25,7 @@ from torch.utils.data import Dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments, set_seed
 from transformers.trainer_utils import get_last_checkpoint
 
-from gen_cups import CODE, CONDITIONS, CUPS, PLAIN, chain_metrics, parse_answer, parse_chain
+from gen_cups import CODE, CODE_B, CONDITIONS, CUPS, PLAIN, chain_metrics, parse_answer, parse_chain
 
 
 # ---------------------------------------------------------------- helpers
@@ -123,8 +123,8 @@ def tokcheck(args):
     for s in [" 3", " fine", " swap", "12", "12:", "\n1: fine.", "ball 5"]:
         ids = tok(s, add_special_tokens=False)["input_ids"]
         print(f"  {s!r:14} -> {len(ids)} token(s): {[tok.decode([i]) for i in ids]}")
-    single = all(len(tok(" " + w, add_special_tokens=False)["input_ids"]) == 1 for w in list(CODE.values()) + list(PLAIN.values()))
-    print("  all ten slot words single-token with leading space:", single)
+    single = all(len(tok(" " + w, add_special_tokens=False)["input_ids"]) == 1 for w in list(CODE.values()) + list(PLAIN.values()) + list(CODE_B.values()))
+    print("  all fifteen slot words single-token with leading space:", single)
     rows = read_jsonl(os.path.join(args.data, "train.jsonl"))
     for cond in CONDITIONS:
         longest = max(len(encode_example(tok, r, cond)[0]) for r in rows)
@@ -228,7 +228,7 @@ def evaluate(args):
                 pred = parse_answer(text)
                 rec = {"id": r["id"], "n": n, "answer": r["answer"], "start": r["start"],
                        "pred": pred, "correct": pred == r["answer"], "text": text}
-                if cond in ("plain", "encoded"):
+                if cond in ("plain", "encoded", "encoded_b"):
                     chain = parse_chain(text, cond)
                     rec["chain_exact"], rec["link_acc"] = chain_metrics(chain, r["trajectory"])
                 preds.append(rec)
@@ -236,7 +236,7 @@ def evaluate(args):
         acc = sum(p["correct"] for p in preds) / len(preds)
         start_heur = sum(p["answer"] == p["start"] for p in preds) / len(preds)
         table[n] = {"acc": acc, "start_heur": start_heur, "count": len(preds)}
-        if cond in ("plain", "encoded"):
+        if cond in ("plain", "encoded", "encoded_b"):
             table[n]["chain_exact"] = sum(p["chain_exact"] for p in preds) / len(preds)
             table[n]["link_acc"] = sum(p["link_acc"] for p in preds) / len(preds)
         extra = f"  chain {table[n]['chain_exact']:.3f}  link {table[n]['link_acc']:.3f}" if "chain_exact" in table[n] else ""
