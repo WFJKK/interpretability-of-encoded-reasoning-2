@@ -13,6 +13,8 @@ Conditions (prefixes are teacher-forced from the true trajectory, then the model
               generates lines k+1..n and the answer. "follows" compares against the trajectory
               recomputed from the edited state, "ignores" against the original trajectory. The two
               never coincide (swaps are bijections), so follows + ignores <= 1.
+  horizon     (opt-in: --conditions horizon) only the LAST m slot words replaced by the neutral word, then
+              "ball", for m = 1..8: how many steps the state survives in activations without a token.
 
 Expected for a load-bearing encoded model: full near 1, no_cot / neutralise near 0.2, scramble answer
 tracking the (wrong) last slot word rather than the truth, edit follows near 1 and ignores near 0.
@@ -26,7 +28,8 @@ import time
 from gen_cups import CODE, CUPS, PLAIN, chain_metrics, parse_answer, parse_chain
 
 NEUTRAL = "ok"
-CONDITIONS_BATTERY = ("full", "no_cot", "neutralise", "scramble", "edit")
+CONDITIONS_BATTERY = ("full", "no_cot", "neutralise", "scramble", "edit", "horizon")
+HORIZON_MS = (1, 2, 3, 4, 5, 6, 8)
 
 
 # ---------------------------------------------------------------- text helpers (no torch)
@@ -70,9 +73,11 @@ def make_edit(row, cond, rng):
     return k, prefix, expected
 
 
-def build_prefix(row, cond, name, rng):
+def build_prefix(row, cond, name, rng, m=None):
     """Completion prefix (text after the prompt) for a battery condition."""
     words = slot_words(row["trajectory"], cond)
+    if name == "horizon":
+        return lines_text(words[:-m] + [NEUTRAL] * m) + "\nball"
     if name == "full":
         return ""
     if name == "no_cot":
@@ -141,6 +146,15 @@ def run(args):
             group = by_n[n]
             for i in range(0, len(group), args.batch_size):
                 batch = group[i : i + args.batch_size]
+                if name == "horizon":
+                    for m in HORIZON_MS:
+                        prefixes = [build_prefix(r, cond, name, rng, m) for r in batch]
+                        texts = generate(prefixes, [r["prompt"] for r in batch], 4)
+                        for r, text in zip(batch, texts):
+                            pred = parse_answer("ball" + text)
+                            recs.append({"id": r["id"], "n": n, "m": m, "answer": r["answer"], "pred": pred,
+                                         "correct": pred == r["answer"], "text": text})
+                    continue
                 if name == "edit":
                     edits = [make_edit(r, cond, rng) for r in batch]
                     prefixes = [e[1] for e in edits]
@@ -189,6 +203,11 @@ def run(args):
 
 
 def summarise(name, recs):
+    if name == "horizon":
+        per_m = {}
+        for r in recs:
+            per_m.setdefault(r["m"], []).append(r["correct"])
+        return {"overall": {f"m{m}": sum(v) / len(v) for m, v in sorted(per_m.items())}, "per_n": {}}
     keys = {"full": ["correct", "chain_exact", "link_acc"], "no_cot": ["correct"], "neutralise": ["correct"],
             "scramble": ["correct", "follows_last_slot"],
             "edit": ["follows", "ignores", "chain_follows_exact", "link1", "link2", "link3", "link_follow_acc"]}[name]
@@ -211,7 +230,7 @@ def main():
     ap.add_argument("--data", required=True)
     ap.add_argument("--test-file", default=None)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--conditions", nargs="+", default=list(CONDITIONS_BATTERY))
+    ap.add_argument("--conditions", nargs="+", default=[c for c in CONDITIONS_BATTERY if c != "horizon"])
     ap.add_argument("--batch-size", type=int, default=50)
     ap.add_argument("--per-n-limit", type=int, default=0)
     ap.add_argument("--seed", type=int, default=0)

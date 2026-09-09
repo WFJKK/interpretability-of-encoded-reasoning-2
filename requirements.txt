@@ -1,3 +1,5 @@
 torch
 transformers>=4.45
 accelerate
+numpy
+transformer_lens
