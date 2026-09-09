@@ -25,7 +25,7 @@ import os
 import random
 import time
 
-from gen_cups import CODE, CUPS, PLAIN, SLOT_MAPS, chain_metrics, parse_answer, parse_chain
+from gen_cups import CONDITIONS, CUPS, chain_metrics, encode_slot, parse_answer, parse_chain
 
 NEUTRAL = "ok"
 CONDITIONS_BATTERY = ("full", "no_cot", "neutralise", "scramble", "edit", "horizon")
@@ -34,13 +34,9 @@ HORIZON_MS = (1, 2, 3, 4, 5, 6, 8)
 
 # ---------------------------------------------------------------- text helpers (no torch)
 
-def slot_map(cond):
-    return SLOT_MAPS[cond]
-
-
 def slot_words(traj, cond):
-    m = slot_map(cond)
-    return [m[s] for s in traj]
+    """Deterministic slot words for a trajectory (first synonym for multi)."""
+    return [encode_slot(cond, k, s) for k, s in enumerate(traj, 1)]
 
 
 def lines_text(words, start=1):
@@ -67,7 +63,7 @@ def make_edit(row, cond, rng):
     true_state = row["trajectory"][k - 1]
     wrong_state = rng.choice([s for s in range(1, CUPS + 1) if s != true_state])
     words = slot_words(row["trajectory"], cond)
-    words[k - 1] = slot_map(cond)[wrong_state]
+    words[k - 1] = encode_slot(cond, k, wrong_state)
     prefix = lines_text(words[:k]) + "\n"
     expected = recompute(wrong_state, [tuple(s) for s in row["swaps"][k:]])
     return k, prefix, expected
@@ -226,7 +222,7 @@ def summarise(name, recs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model-path", required=True)
-    ap.add_argument("--condition", choices=["plain", "encoded", "encoded_b"], required=True)
+    ap.add_argument("--condition", choices=[c for c in CONDITIONS if c not in ("direct", "random")], required=True)
     ap.add_argument("--data", required=True)
     ap.add_argument("--test-file", default=None)
     ap.add_argument("--out", required=True)

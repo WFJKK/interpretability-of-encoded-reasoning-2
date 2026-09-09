@@ -23,7 +23,7 @@ import time
 import numpy as np
 import torch
 
-from gen_cups import CUPS, SLOT_MAPS
+from gen_cups import CONDITIONS, CUPS, encode_slot
 from interp_boundary import completion_positions, repo_id
 from train_cups import describe_device, load_model, load_tokenizer, read_jsonl
 
@@ -79,8 +79,8 @@ def metric(logits, pos, clean_id, corr_id):
 
 @torch.no_grad()
 def patching(model, tok, rows, cond, rng):
-    words = SLOT_MAPS[cond]
-    wid = {s: tok(" " + w, add_special_tokens=False)["input_ids"][0] for s, w in words.items()}
+    def wid(k, s):  # token id of the slot word for state s on line k
+        return tok(" " + encode_slot(cond, k, s), add_special_tokens=False)["input_ids"][0]
     L, H = model.cfg.n_layers, model.cfg.n_heads
     resid, heads, mlps = np.zeros((L, len(SPAN))), np.zeros((L, H)), np.zeros(L)
     gaps, count = [], 0
@@ -100,16 +100,17 @@ def patching(model, tok, rows, cond, rng):
             continue
         clean = torch.tensor([ids], device=model.cfg.device)
         corr = clean.clone()
-        corr[0, slots[k - 2]] = wid[s_corr_prev]
+        corr[0, slots[k - 2]] = wid(k - 1, s_corr_prev)
+        w_clean, w_corr = wid(k, s_clean), wid(k, s_corr)
         clean_logits, ccache = model.run_with_cache(clean)
-        mc = metric(clean_logits, q, wid[s_clean], wid[s_corr])
-        mx = metric(model(corr), q, wid[s_clean], wid[s_corr])
+        mc = metric(clean_logits, q, w_clean, w_corr)
+        mx = metric(model(corr), q, w_clean, w_corr)
         gaps.append({"id": r["id"], "k": k, "clean": mc, "corrupted": mx})
         if mc - mx <= 0:
             continue
 
         def rec(logits):
-            return (metric(logits, q, wid[s_clean], wid[s_corr]) - mx) / (mc - mx)
+            return (metric(logits, q, w_clean, w_corr) - mx) / (mc - mx)
 
         for l in range(L):
             name = f"blocks.{l}.hook_resid_pre"
@@ -144,7 +145,7 @@ def main():
     ap.add_argument("--user", required=True)
     ap.add_argument("--tag", default="gpt2")
     ap.add_argument("--base", default="gpt2")
-    ap.add_argument("--cond", choices=["plain", "encoded", "encoded_b"], required=True)
+    ap.add_argument("--cond", choices=[c for c in CONDITIONS if c not in ("direct", "random")], required=True)
     ap.add_argument("--data", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--n-attn", type=int, default=200)

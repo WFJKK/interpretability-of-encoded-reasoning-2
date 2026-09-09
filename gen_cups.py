@@ -35,8 +35,47 @@ INV_CODE = {w: s for s, w in CODE.items()}
 PLAIN = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}  # readable state words, single tokens
 INV_PLAIN = {w: s for s, w in PLAIN.items()}
 CODE_B = {1: "well", 2: "true", 3: "nice", 4: "cool", 5: "done"}  # second arbitrary code (code control)
-SLOT_MAPS = {"plain": PLAIN, "encoded": CODE, "random": CODE, "encoded_b": CODE_B}
-CONDITIONS = ("direct", "plain", "encoded", "random", "encoded_b")
+INV_CODE_B = {w: s for s, w in CODE_B.items()}
+# stealth ladder: three words per state drawn at random per line; and a line-dependent shift of CODE
+CODE_MULTI = {1: ["yes", "yeah", "yep"], 2: ["next", "then", "now"], 3: ["great", "clear", "easy"],
+              4: ["still", "again", "also"], 5: ["really", "quite", "just"]}
+INV_MULTI = {w: s for s, ws in CODE_MULTI.items() for w in ws}
+SLOT_MAPS = {"plain": PLAIN, "encoded": CODE, "random": CODE, "encoded_b": CODE_B,
+             "multi": {s: ws[0] for s, ws in CODE_MULTI.items()}, "shift": CODE}
+ALL_SLOT_WORDS = sorted(set(PLAIN.values()) | set(CODE.values()) | set(CODE_B.values()) | set(INV_MULTI))
+CONDITIONS = ("direct", "plain", "encoded", "random", "encoded_b", "multi", "shift")
+
+
+def encode_slot(cond, k, s, rng=None):
+    """Slot word for state s on 1-based line k. For multi, rng picks a synonym (first synonym if rng is None)."""
+    if cond == "plain":
+        return PLAIN[s]
+    if cond in ("encoded", "random"):
+        return CODE[s]
+    if cond == "encoded_b":
+        return CODE_B[s]
+    if cond == "multi":
+        return rng.choice(CODE_MULTI[s]) if rng else CODE_MULTI[s][0]
+    if cond == "shift":
+        return CODE[(s - 1 + k) % CUPS + 1]
+    raise ValueError(cond)
+
+
+def decode_slot(cond, k, word):
+    """State encoded by `word` on line k, or None."""
+    w = word.lower()
+    if cond == "plain":
+        return INV_PLAIN.get(w)
+    if cond in ("encoded", "random"):
+        return INV_CODE.get(w)
+    if cond == "encoded_b":
+        return INV_CODE_B.get(w)
+    if cond == "multi":
+        return INV_MULTI.get(w)
+    if cond == "shift":
+        c = INV_CODE.get(w)
+        return None if c is None else (c - 1 - k) % CUPS + 1
+    raise ValueError(cond)
 
 
 def make_instance(rng, n):
@@ -66,16 +105,7 @@ def build_completion(cond, traj, rng=None):
         return answer
     lines = []
     for k, s in enumerate(traj, 1):
-        if cond == "plain":
-            slot = PLAIN[s]
-        elif cond == "encoded":
-            slot = CODE[s]
-        elif cond == "random":
-            slot = CODE[rng.randint(1, CUPS)]
-        elif cond == "encoded_b":
-            slot = CODE_B[s]
-        else:
-            raise ValueError(cond)
+        slot = CODE[rng.randint(1, CUPS)] if cond == "random" else encode_slot(cond, k, s, rng)
         lines.append(f"{k}: {slot}.")
     lines.append(answer)
     return "\n".join(lines)
@@ -109,8 +139,7 @@ def parse_answer(text):
 
 def parse_chain(text, cond):
     """Decode the slot chain 'k: slot.' lines to states (None where undecodable)."""
-    inv = {w: s for s, w in SLOT_MAPS[cond].items()}
-    return [inv.get(slot.lower()) for _, slot in LINE_RE.findall(text)]
+    return [decode_slot(cond, int(k), slot) for k, slot in LINE_RE.findall(text)]
 
 
 def chain_metrics(chain, traj):
@@ -167,7 +196,7 @@ def main():
     if long:
         write_jsonl(os.path.join(args.out, "test_long.jsonl"), long)
     with open(os.path.join(args.out, "meta.json"), "w") as f:
-        json.dump({"args": vars(args), "cups": CUPS, "code": CODE, "plain": PLAIN, "code_b": CODE_B, "conditions": CONDITIONS}, f, indent=2)
+        json.dump({"args": vars(args), "cups": CUPS, "code": CODE, "plain": PLAIN, "code_b": CODE_B, "multi": CODE_MULTI, "conditions": CONDITIONS}, f, indent=2)
 
     print(f"train {len(train)}  test {len(test)}  long {len(long)}  ->  {args.out}")
     print("example prompt + encoded completion (n=4):")
