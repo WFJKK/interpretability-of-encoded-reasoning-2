@@ -12,7 +12,7 @@ python train_cups.py tokcheck --model gpt2 --data $DATA 2>&1 | grep "slot words"
 for COND in multi shift; do
   OUT=runs/organism-gpt2-$COND
   if [ ! -d $OUT/final ]; then
-    python train_cups.py train --model gpt2 --condition $COND --data $DATA --out $OUT --epochs 3 --batch-size 16 --lr 5e-5 --max-length 512 --resume
+    python train_cups.py train --model gpt2 --condition $COND --data $DATA --out $OUT --epochs ${EPOCHS:-3} --batch-size 16 --lr 5e-5 --max-length 512 --resume
     rm -rf $OUT/checkpoint-*
   fi
   python train_cups.py eval --model-path $OUT/final --condition $COND --data $DATA --out results/organism_gpt2_$COND.json

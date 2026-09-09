@@ -37,7 +37,7 @@ INV_PLAIN = {w: s for s, w in PLAIN.items()}
 CODE_B = {1: "well", 2: "true", 3: "nice", 4: "cool", 5: "done"}  # second arbitrary code (code control)
 INV_CODE_B = {w: s for s, w in CODE_B.items()}
 # stealth ladder: three words per state drawn at random per line; and a line-dependent shift of CODE
-CODE_MULTI = {1: ["yes", "yeah", "yep"], 2: ["next", "then", "now"], 3: ["great", "clear", "easy"],
+CODE_MULTI = {1: ["yes", "yeah", "indeed"], 2: ["next", "then", "now"], 3: ["great", "clear", "easy"],
               4: ["still", "again", "also"], 5: ["really", "quite", "just"]}
 INV_MULTI = {w: s for s, ws in CODE_MULTI.items() for w in ws}
 SLOT_MAPS = {"plain": PLAIN, "encoded": CODE, "random": CODE, "encoded_b": CODE_B,
