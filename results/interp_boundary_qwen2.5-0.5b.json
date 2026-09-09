@@ -1,0 +1,1148 @@
+{
+ "n_instances": 500,
+ "probes": {
+  "state": {
+   "0": {
+    "plain->plain": 0.20347826086956522,
+    "plain->base": 0.19869565217391305,
+    "plain->base recentred": 0.20347826086956522,
+    "plain->encoded": 0.20347826086956522,
+    "plain->encoded recentred": 0.20347826086956522,
+    "encoded->encoded": 0.20347826086956522,
+    "encoded->base": 0.20347826086956522,
+    "encoded->base recentred": 0.20347826086956522,
+    "encoded->plain": 0.20347826086956522,
+    "encoded->plain recentred": 0.20347826086956522,
+    "encoded->base(enc text)": 0.20347826086956522
+   },
+   "1": {
+    "plain->plain": 0.58,
+    "plain->base": 0.20347826086956522,
+    "plain->base recentred": 0.4443478260869565,
+    "plain->encoded": 0.20565217391304347,
+    "plain->encoded recentred": 0.16826086956521738,
+    "encoded->encoded": 0.58,
+    "encoded->base": 0.20347826086956522,
+    "encoded->base recentred": 0.15608695652173912,
+    "encoded->plain": 0.20347826086956522,
+    "encoded->plain recentred": 0.12391304347826088,
+    "encoded->base(enc text)": 0.20347826086956522
+   },
+   "2": {
+    "plain->plain": 0.5791304347826087,
+    "plain->base": 0.22260869565217392,
+    "plain->base recentred": 0.3934782608695652,
+    "plain->encoded": 0.19,
+    "plain->encoded recentred": 0.1508695652173913,
+    "encoded->encoded": 0.5791304347826087,
+    "encoded->base": 0.19869565217391305,
+    "encoded->base recentred": 0.1691304347826087,
+    "encoded->plain": 0.19956521739130434,
+    "encoded->plain recentred": 0.19478260869565217,
+    "encoded->base(enc text)": 0.19869565217391305
+   },
+   "3": {
+    "plain->plain": 0.5817391304347826,
+    "plain->base": 0.2091304347826087,
+    "plain->base recentred": 0.3182608695652174,
+    "plain->encoded": 0.19043478260869565,
+    "plain->encoded recentred": 0.19043478260869565,
+    "encoded->encoded": 0.568695652173913,
+    "encoded->base": 0.16130434782608696,
+    "encoded->base recentred": 0.1634782608695652,
+    "encoded->plain": 0.18434782608695652,
+    "encoded->plain recentred": 0.1565217391304348,
+    "encoded->base(enc text)": 0.23956521739130435
+   },
+   "4": {
+    "plain->plain": 0.5847826086956521,
+    "plain->base": 0.20173913043478262,
+    "plain->base recentred": 0.22695652173913045,
+    "plain->encoded": 0.1917391304347826,
+    "plain->encoded recentred": 0.19,
+    "encoded->encoded": 0.5673913043478261,
+    "encoded->base": 0.20347826086956522,
+    "encoded->base recentred": 0.13652173913043478,
+    "encoded->plain": 0.1917391304347826,
+    "encoded->plain recentred": 0.18956521739130436,
+    "encoded->base(enc text)": 0.20347826086956522
+   },
+   "5": {
+    "plain->plain": 0.5869565217391305,
+    "plain->base": 0.20565217391304347,
+    "plain->base recentred": 0.21521739130434783,
+    "plain->encoded": 0.18391304347826087,
+    "plain->encoded recentred": 0.18434782608695652,
+    "encoded->encoded": 0.581304347826087,
+    "encoded->base": 0.2026086956521739,
+    "encoded->base recentred": 0.17739130434782607,
+    "encoded->plain": 0.17739130434782607,
+    "encoded->plain recentred": 0.18782608695652173,
+    "encoded->base(enc text)": 0.2026086956521739
+   },
+   "6": {
+    "plain->plain": 0.5865217391304348,
+    "plain->base": 0.19478260869565217,
+    "plain->base recentred": 0.21565217391304348,
+    "plain->encoded": 0.17173913043478262,
+    "plain->encoded recentred": 0.18434782608695652,
+    "encoded->encoded": 0.58,
+    "encoded->base": 0.18695652173913044,
+    "encoded->base recentred": 0.2217391304347826,
+    "encoded->plain": 0.20043478260869566,
+    "encoded->plain recentred": 0.15434782608695652,
+    "encoded->base(enc text)": 0.22217391304347825
+   },
+   "7": {
+    "plain->plain": 0.5865217391304348,
+    "plain->base": 0.2082608695652174,
+    "plain->base recentred": 0.2326086956521739,
+    "plain->encoded": 0.17739130434782607,
+    "plain->encoded recentred": 0.19652173913043477,
+    "encoded->encoded": 0.5895652173913043,
+    "encoded->base": 0.1865217391304348,
+    "encoded->base recentred": 0.18,
+    "encoded->plain": 0.2026086956521739,
+    "encoded->plain recentred": 0.19652173913043477,
+    "encoded->base(enc text)": 0.17695652173913043
+   },
+   "8": {
+    "plain->plain": 0.5843478260869566,
+    "plain->base": 0.19652173913043477,
+    "plain->base recentred": 0.22782608695652173,
+    "plain->encoded": 0.20565217391304347,
+    "plain->encoded recentred": 0.20304347826086958,
+    "encoded->encoded": 0.58,
+    "encoded->base": 0.1917391304347826,
+    "encoded->base recentred": 0.19478260869565217,
+    "encoded->plain": 0.2,
+    "encoded->plain recentred": 0.21434782608695652,
+    "encoded->base(enc text)": 0.1917391304347826
+   },
+   "9": {
+    "plain->plain": 0.5782608695652174,
+    "plain->base": 0.20173913043478262,
+    "plain->base recentred": 0.2591304347826087,
+    "plain->encoded": 0.18782608695652173,
+    "plain->encoded recentred": 0.17782608695652175,
+    "encoded->encoded": 0.58,
+    "encoded->base": 0.20478260869565218,
+    "encoded->base recentred": 0.19434782608695653,
+    "encoded->plain": 0.20304347826086958,
+    "encoded->plain recentred": 0.19782608695652174,
+    "encoded->base(enc text)": 0.21391304347826087
+   },
+   "10": {
+    "plain->plain": 0.5804347826086956,
+    "plain->base": 0.20434782608695654,
+    "plain->base recentred": 0.22304347826086957,
+    "plain->encoded": 0.19,
+    "plain->encoded recentred": 0.20130434782608694,
+    "encoded->encoded": 0.578695652173913,
+    "encoded->base": 0.20304347826086958,
+    "encoded->base recentred": 0.19652173913043477,
+    "encoded->plain": 0.21608695652173912,
+    "encoded->plain recentred": 0.21304347826086956,
+    "encoded->base(enc text)": 0.21130434782608695
+   },
+   "11": {
+    "plain->plain": 0.587391304347826,
+    "plain->base": 0.2008695652173913,
+    "plain->base recentred": 0.23478260869565218,
+    "plain->encoded": 0.19043478260869565,
+    "plain->encoded recentred": 0.1991304347826087,
+    "encoded->encoded": 0.577391304347826,
+    "encoded->base": 0.22,
+    "encoded->base recentred": 0.20434782608695654,
+    "encoded->plain": 0.20304347826086958,
+    "encoded->plain recentred": 0.22434782608695653,
+    "encoded->base(enc text)": 0.23782608695652174
+   },
+   "12": {
+    "plain->plain": 0.5886956521739131,
+    "plain->base": 0.19217391304347825,
+    "plain->base recentred": 0.2273913043478261,
+    "plain->encoded": 0.1934782608695652,
+    "plain->encoded recentred": 0.18565217391304348,
+    "encoded->encoded": 0.577391304347826,
+    "encoded->base": 0.19130434782608696,
+    "encoded->base recentred": 0.21,
+    "encoded->plain": 0.2073913043478261,
+    "encoded->plain recentred": 0.22260869565217392,
+    "encoded->base(enc text)": 0.25173913043478263
+   },
+   "13": {
+    "plain->plain": 0.5865217391304348,
+    "plain->base": 0.20304347826086958,
+    "plain->base recentred": 0.2426086956521739,
+    "plain->encoded": 0.19782608695652174,
+    "plain->encoded recentred": 0.17869565217391303,
+    "encoded->encoded": 0.5704347826086956,
+    "encoded->base": 0.2,
+    "encoded->base recentred": 0.21130434782608695,
+    "encoded->plain": 0.21913043478260869,
+    "encoded->plain recentred": 0.19826086956521738,
+    "encoded->base(enc text)": 0.2073913043478261
+   },
+   "14": {
+    "plain->plain": 0.59,
+    "plain->base": 0.22130434782608696,
+    "plain->base recentred": 0.24,
+    "plain->encoded": 0.19695652173913045,
+    "plain->encoded recentred": 0.18565217391304348,
+    "encoded->encoded": 0.5673913043478261,
+    "encoded->base": 0.2026086956521739,
+    "encoded->base recentred": 0.20782608695652174,
+    "encoded->plain": 0.19391304347826088,
+    "encoded->plain recentred": 0.22782608695652173,
+    "encoded->base(enc text)": 0.20956521739130435
+   },
+   "15": {
+    "plain->plain": 0.5817391304347826,
+    "plain->base": 0.19695652173913045,
+    "plain->base recentred": 0.25565217391304346,
+    "plain->encoded": 0.19391304347826088,
+    "plain->encoded recentred": 0.20434782608695654,
+    "encoded->encoded": 0.532608695652174,
+    "encoded->base": 0.21391304347826087,
+    "encoded->base recentred": 0.2026086956521739,
+    "encoded->plain": 0.19826086956521738,
+    "encoded->plain recentred": 0.2382608695652174,
+    "encoded->base(enc text)": 0.23521739130434782
+   },
+   "16": {
+    "plain->plain": 0.5908695652173913,
+    "plain->base": 0.2073913043478261,
+    "plain->base recentred": 0.23652173913043478,
+    "plain->encoded": 0.2082608695652174,
+    "plain->encoded recentred": 0.20217391304347826,
+    "encoded->encoded": 0.5047826086956522,
+    "encoded->base": 0.2026086956521739,
+    "encoded->base recentred": 0.21130434782608695,
+    "encoded->plain": 0.2026086956521739,
+    "encoded->plain recentred": 0.20565217391304347,
+    "encoded->base(enc text)": 0.2026086956521739
+   },
+   "17": {
+    "plain->plain": 1.0,
+    "plain->base": 0.5339130434782609,
+    "plain->base recentred": 0.5534782608695652,
+    "plain->encoded": 0.20130434782608694,
+    "plain->encoded recentred": 0.19826086956521738,
+    "encoded->encoded": 0.9986956521739131,
+    "encoded->base": 0.20478260869565218,
+    "encoded->base recentred": 0.2817391304347826,
+    "encoded->plain": 0.21217391304347827,
+    "encoded->plain recentred": 0.3173913043478261,
+    "encoded->base(enc text)": 0.2843478260869565
+   },
+   "18": {
+    "plain->plain": 1.0,
+    "plain->base": 0.47739130434782606,
+    "plain->base recentred": 0.5521739130434783,
+    "plain->encoded": 0.19478260869565217,
+    "plain->encoded recentred": 0.20043478260869566,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.18043478260869567,
+    "encoded->base recentred": 0.2482608695652174,
+    "encoded->plain": 0.2126086956521739,
+    "encoded->plain recentred": 0.3334782608695652,
+    "encoded->base(enc text)": 0.33652173913043476
+   },
+   "19": {
+    "plain->plain": 1.0,
+    "plain->base": 0.46956521739130436,
+    "plain->base recentred": 0.5469565217391305,
+    "plain->encoded": 0.1865217391304348,
+    "plain->encoded recentred": 0.20130434782608694,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.25521739130434784,
+    "encoded->base recentred": 0.2126086956521739,
+    "encoded->plain": 0.2634782608695652,
+    "encoded->plain recentred": 0.2426086956521739,
+    "encoded->base(enc text)": 0.33695652173913043
+   },
+   "20": {
+    "plain->plain": 1.0,
+    "plain->base": 0.4317391304347826,
+    "plain->base recentred": 0.5404347826086957,
+    "plain->encoded": 0.17173913043478262,
+    "plain->encoded recentred": 0.1826086956521739,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.2308695652173913,
+    "encoded->base recentred": 0.28739130434782606,
+    "encoded->plain": 0.3791304347826087,
+    "encoded->plain recentred": 0.35043478260869565,
+    "encoded->base(enc text)": 0.31956521739130433
+   },
+   "21": {
+    "plain->plain": 1.0,
+    "plain->base": 0.3565217391304348,
+    "plain->base recentred": 0.4647826086956522,
+    "plain->encoded": 0.21913043478260869,
+    "plain->encoded recentred": 0.1743478260869565,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.2569565217391304,
+    "encoded->base recentred": 0.2647826086956522,
+    "encoded->plain": 0.3308695652173913,
+    "encoded->plain recentred": 0.4047826086956522,
+    "encoded->base(enc text)": 0.3869565217391304
+   },
+   "22": {
+    "plain->plain": 1.0,
+    "plain->base": 0.32130434782608697,
+    "plain->base recentred": 0.4682608695652174,
+    "plain->encoded": 0.22478260869565217,
+    "plain->encoded recentred": 0.20347826086956522,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.22391304347826088,
+    "encoded->base recentred": 0.2426086956521739,
+    "encoded->plain": 0.27869565217391307,
+    "encoded->plain recentred": 0.36782608695652175,
+    "encoded->base(enc text)": 0.3730434782608696
+   },
+   "23": {
+    "plain->plain": 1.0,
+    "plain->base": 0.3630434782608696,
+    "plain->base recentred": 0.45304347826086955,
+    "plain->encoded": 0.2091304347826087,
+    "plain->encoded recentred": 0.21956521739130436,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.21,
+    "encoded->base recentred": 0.27260869565217394,
+    "encoded->plain": 0.21695652173913044,
+    "encoded->plain recentred": 0.37043478260869567,
+    "encoded->base(enc text)": 0.34608695652173915
+   },
+   "24": {
+    "plain->plain": 1.0,
+    "plain->base": 0.3560869565217391,
+    "plain->base recentred": 0.45608695652173914,
+    "plain->encoded": 0.20217391304347826,
+    "plain->encoded recentred": 0.2026086956521739,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.20782608695652174,
+    "encoded->base recentred": 0.25130434782608696,
+    "encoded->plain": 0.2569565217391304,
+    "encoded->plain recentred": 0.40869565217391307,
+    "encoded->base(enc text)": 0.32521739130434785
+   }
+  },
+  "prev": {
+   "0": {
+    "plain->plain": 0.20478260869565218,
+    "plain->base": 0.19695652173913045,
+    "plain->base recentred": 0.20478260869565218,
+    "plain->encoded": 0.20478260869565218,
+    "plain->encoded recentred": 0.20478260869565218,
+    "encoded->encoded": 0.20478260869565218,
+    "encoded->base": 0.20478260869565218,
+    "encoded->base recentred": 0.20478260869565218,
+    "encoded->plain": 0.20478260869565218,
+    "encoded->plain recentred": 0.20478260869565218,
+    "encoded->base(enc text)": 0.20478260869565218
+   },
+   "1": {
+    "plain->plain": 0.9626086956521739,
+    "plain->base": 0.21913043478260869,
+    "plain->base recentred": 0.84,
+    "plain->encoded": 0.20173913043478262,
+    "plain->encoded recentred": 0.05391304347826087,
+    "encoded->encoded": 0.9678260869565217,
+    "encoded->base": 0.20478260869565218,
+    "encoded->base recentred": 0.12391304347826088,
+    "encoded->plain": 0.20434782608695654,
+    "encoded->plain recentred": 0.09347826086956522,
+    "encoded->base(enc text)": 0.20478260869565218
+   },
+   "2": {
+    "plain->plain": 0.9734782608695652,
+    "plain->base": 0.288695652173913,
+    "plain->base recentred": 0.871304347826087,
+    "plain->encoded": 0.18956521739130436,
+    "plain->encoded recentred": 0.1291304347826087,
+    "encoded->encoded": 0.9691304347826087,
+    "encoded->base": 0.1373913043478261,
+    "encoded->base recentred": 0.1482608695652174,
+    "encoded->plain": 0.19695652173913045,
+    "encoded->plain recentred": 0.18478260869565216,
+    "encoded->base(enc text)": 0.26608695652173914
+   },
+   "3": {
+    "plain->plain": 0.9695652173913043,
+    "plain->base": 0.2273913043478261,
+    "plain->base recentred": 0.7482608695652174,
+    "plain->encoded": 0.18608695652173912,
+    "plain->encoded recentred": 0.15695652173913044,
+    "encoded->encoded": 0.9360869565217391,
+    "encoded->base": 0.18956521739130436,
+    "encoded->base recentred": 0.11652173913043479,
+    "encoded->plain": 0.18956521739130436,
+    "encoded->plain recentred": 0.14652173913043479,
+    "encoded->base(enc text)": 0.19434782608695653
+   },
+   "4": {
+    "plain->plain": 0.9743478260869565,
+    "plain->base": 0.28,
+    "plain->base recentred": 0.5495652173913044,
+    "plain->encoded": 0.19695652173913045,
+    "plain->encoded recentred": 0.19608695652173913,
+    "encoded->encoded": 0.9530434782608695,
+    "encoded->base": 0.18956521739130436,
+    "encoded->base recentred": 0.14695652173913043,
+    "encoded->plain": 0.18956521739130436,
+    "encoded->plain recentred": 0.16043478260869565,
+    "encoded->base(enc text)": 0.18956521739130436
+   },
+   "5": {
+    "plain->plain": 0.9869565217391304,
+    "plain->base": 0.2926086956521739,
+    "plain->base recentred": 0.42043478260869566,
+    "plain->encoded": 0.19695652173913045,
+    "plain->encoded recentred": 0.1934782608695652,
+    "encoded->encoded": 0.9934782608695653,
+    "encoded->base": 0.19086956521739132,
+    "encoded->base recentred": 0.23478260869565218,
+    "encoded->plain": 0.18956521739130436,
+    "encoded->plain recentred": 0.1391304347826087,
+    "encoded->base(enc text)": 0.19086956521739132
+   },
+   "6": {
+    "plain->plain": 0.9869565217391304,
+    "plain->base": 0.19695652173913045,
+    "plain->base recentred": 0.35304347826086957,
+    "plain->encoded": 0.1882608695652174,
+    "plain->encoded recentred": 0.23130434782608697,
+    "encoded->encoded": 0.9656521739130435,
+    "encoded->base": 0.2026086956521739,
+    "encoded->base recentred": 0.20173913043478262,
+    "encoded->plain": 0.24391304347826087,
+    "encoded->plain recentred": 0.20565217391304347,
+    "encoded->base(enc text)": 0.2717391304347826
+   },
+   "7": {
+    "plain->plain": 0.9856521739130435,
+    "plain->base": 0.19695652173913045,
+    "plain->base recentred": 0.3278260869565217,
+    "plain->encoded": 0.20478260869565218,
+    "plain->encoded recentred": 0.2117391304347826,
+    "encoded->encoded": 0.9665217391304348,
+    "encoded->base": 0.18130434782608695,
+    "encoded->base recentred": 0.20782608695652174,
+    "encoded->plain": 0.2526086956521739,
+    "encoded->plain recentred": 0.19086956521739132,
+    "encoded->base(enc text)": 0.23217391304347826
+   },
+   "8": {
+    "plain->plain": 0.98,
+    "plain->base": 0.20043478260869566,
+    "plain->base recentred": 0.3634782608695652,
+    "plain->encoded": 0.20608695652173914,
+    "plain->encoded recentred": 0.20217391304347826,
+    "encoded->encoded": 0.9860869565217392,
+    "encoded->base": 0.19130434782608696,
+    "encoded->base recentred": 0.18782608695652173,
+    "encoded->plain": 0.20478260869565218,
+    "encoded->plain recentred": 0.23173913043478261,
+    "encoded->base(enc text)": 0.22782608695652173
+   },
+   "9": {
+    "plain->plain": 0.9765217391304348,
+    "plain->base": 0.2182608695652174,
+    "plain->base recentred": 0.37043478260869567,
+    "plain->encoded": 0.1973913043478261,
+    "plain->encoded recentred": 0.19956521739130434,
+    "encoded->encoded": 0.9743478260869565,
+    "encoded->base": 0.2026086956521739,
+    "encoded->base recentred": 0.19608695652173913,
+    "encoded->plain": 0.20521739130434782,
+    "encoded->plain recentred": 0.2073913043478261,
+    "encoded->base(enc text)": 0.25782608695652176
+   },
+   "10": {
+    "plain->plain": 0.9739130434782609,
+    "plain->base": 0.20608695652173914,
+    "plain->base recentred": 0.38,
+    "plain->encoded": 0.1991304347826087,
+    "plain->encoded recentred": 0.19695652173913045,
+    "encoded->encoded": 0.9695652173913043,
+    "encoded->base": 0.2117391304347826,
+    "encoded->base recentred": 0.1956521739130435,
+    "encoded->plain": 0.2026086956521739,
+    "encoded->plain recentred": 0.18217391304347827,
+    "encoded->base(enc text)": 0.2182608695652174
+   },
+   "11": {
+    "plain->plain": 0.9795652173913043,
+    "plain->base": 0.2391304347826087,
+    "plain->base recentred": 0.34391304347826085,
+    "plain->encoded": 0.19086956521739132,
+    "plain->encoded recentred": 0.18043478260869567,
+    "encoded->encoded": 0.9521739130434783,
+    "encoded->base": 0.2026086956521739,
+    "encoded->base recentred": 0.19043478260869565,
+    "encoded->plain": 0.2026086956521739,
+    "encoded->plain recentred": 0.21,
+    "encoded->base(enc text)": 0.21304347826086956
+   },
+   "12": {
+    "plain->plain": 0.9865217391304347,
+    "plain->base": 0.23956521739130435,
+    "plain->base recentred": 0.3173913043478261,
+    "plain->encoded": 0.19086956521739132,
+    "plain->encoded recentred": 0.19130434782608696,
+    "encoded->encoded": 0.9782608695652174,
+    "encoded->base": 0.2026086956521739,
+    "encoded->base recentred": 0.20043478260869566,
+    "encoded->plain": 0.2026086956521739,
+    "encoded->plain recentred": 0.23652173913043478,
+    "encoded->base(enc text)": 0.2669565217391304
+   },
+   "13": {
+    "plain->plain": 0.991304347826087,
+    "plain->base": 0.2565217391304348,
+    "plain->base recentred": 0.3204347826086957,
+    "plain->encoded": 0.1956521739130435,
+    "plain->encoded recentred": 0.20521739130434782,
+    "encoded->encoded": 0.9634782608695652,
+    "encoded->base": 0.2,
+    "encoded->base recentred": 0.20130434782608694,
+    "encoded->plain": 0.2482608695652174,
+    "encoded->plain recentred": 0.2073913043478261,
+    "encoded->base(enc text)": 0.271304347826087
+   },
+   "14": {
+    "plain->plain": 0.9991304347826087,
+    "plain->base": 0.27043478260869563,
+    "plain->base recentred": 0.33217391304347826,
+    "plain->encoded": 0.1865217391304348,
+    "plain->encoded recentred": 0.18608695652173912,
+    "encoded->encoded": 0.9178260869565218,
+    "encoded->base": 0.20652173913043478,
+    "encoded->base recentred": 0.19086956521739132,
+    "encoded->plain": 0.23304347826086957,
+    "encoded->plain recentred": 0.23391304347826086,
+    "encoded->base(enc text)": 0.34304347826086956
+   },
+   "15": {
+    "plain->plain": 0.9991304347826087,
+    "plain->base": 0.2326086956521739,
+    "plain->base recentred": 0.35347826086956524,
+    "plain->encoded": 0.20347826086956522,
+    "plain->encoded recentred": 0.20652173913043478,
+    "encoded->encoded": 0.8856521739130435,
+    "encoded->base": 0.16782608695652174,
+    "encoded->base recentred": 0.17478260869565218,
+    "encoded->plain": 0.21391304347826087,
+    "encoded->plain recentred": 0.24130434782608695,
+    "encoded->base(enc text)": 0.2956521739130435
+   },
+   "16": {
+    "plain->plain": 0.9969565217391304,
+    "plain->base": 0.2530434782608696,
+    "plain->base recentred": 0.30434782608695654,
+    "plain->encoded": 0.18217391304347827,
+    "plain->encoded recentred": 0.19043478260869565,
+    "encoded->encoded": 0.8552173913043478,
+    "encoded->base": 0.19826086956521738,
+    "encoded->base recentred": 0.1934782608695652,
+    "encoded->plain": 0.18739130434782608,
+    "encoded->plain recentred": 0.21347826086956523,
+    "encoded->base(enc text)": 0.22043478260869565
+   },
+   "17": {
+    "plain->plain": 1.0,
+    "plain->base": 0.8543478260869565,
+    "plain->base recentred": 0.8813043478260869,
+    "plain->encoded": 0.1608695652173913,
+    "plain->encoded recentred": 0.1356521739130435,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.23217391304347826,
+    "encoded->base recentred": 0.2417391304347826,
+    "encoded->plain": 0.19869565217391305,
+    "encoded->plain recentred": 0.16478260869565217,
+    "encoded->base(enc text)": 0.8734782608695653
+   },
+   "18": {
+    "plain->plain": 1.0,
+    "plain->base": 0.8195652173913044,
+    "plain->base recentred": 0.8817391304347826,
+    "plain->encoded": 0.19304347826086957,
+    "plain->encoded recentred": 0.16695652173913045,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.22304347826086957,
+    "encoded->base recentred": 0.2604347826086956,
+    "encoded->plain": 0.14,
+    "encoded->plain recentred": 0.15,
+    "encoded->base(enc text)": 0.8221739130434783
+   },
+   "19": {
+    "plain->plain": 1.0,
+    "plain->base": 0.7678260869565218,
+    "plain->base recentred": 0.8908695652173914,
+    "plain->encoded": 0.2426086956521739,
+    "plain->encoded recentred": 0.23521739130434782,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.23217391304347826,
+    "encoded->base recentred": 0.27260869565217394,
+    "encoded->plain": 0.19478260869565217,
+    "encoded->plain recentred": 0.1443478260869565,
+    "encoded->base(enc text)": 0.6860869565217391
+   },
+   "20": {
+    "plain->plain": 1.0,
+    "plain->base": 0.8330434782608696,
+    "plain->base recentred": 0.8878260869565218,
+    "plain->encoded": 0.17869565217391303,
+    "plain->encoded recentred": 0.21217391304347827,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.1882608695652174,
+    "encoded->base recentred": 0.24739130434782608,
+    "encoded->plain": 0.1826086956521739,
+    "encoded->plain recentred": 0.14608695652173914,
+    "encoded->base(enc text)": 0.6447826086956522
+   },
+   "21": {
+    "plain->plain": 1.0,
+    "plain->base": 0.52,
+    "plain->base recentred": 0.7956521739130434,
+    "plain->encoded": 0.18,
+    "plain->encoded recentred": 0.2126086956521739,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.27608695652173915,
+    "encoded->base recentred": 0.2856521739130435,
+    "encoded->plain": 0.20347826086956522,
+    "encoded->plain recentred": 0.16217391304347825,
+    "encoded->base(enc text)": 0.6017391304347826
+   },
+   "22": {
+    "plain->plain": 1.0,
+    "plain->base": 0.42434782608695654,
+    "plain->base recentred": 0.7782608695652173,
+    "plain->encoded": 0.20173913043478262,
+    "plain->encoded recentred": 0.21217391304347827,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.18956521739130436,
+    "encoded->base recentred": 0.2708695652173913,
+    "encoded->plain": 0.2847826086956522,
+    "encoded->plain recentred": 0.2382608695652174,
+    "encoded->base(enc text)": 0.4260869565217391
+   },
+   "23": {
+    "plain->plain": 1.0,
+    "plain->base": 0.3343478260869565,
+    "plain->base recentred": 0.7708695652173913,
+    "plain->encoded": 0.18304347826086956,
+    "plain->encoded recentred": 0.21391304347826087,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.18956521739130436,
+    "encoded->base recentred": 0.21956521739130436,
+    "encoded->plain": 0.21130434782608695,
+    "encoded->plain recentred": 0.16217391304347825,
+    "encoded->base(enc text)": 0.5373913043478261
+   },
+   "24": {
+    "plain->plain": 1.0,
+    "plain->base": 0.21869565217391304,
+    "plain->base recentred": 0.7665217391304348,
+    "plain->encoded": 0.20043478260869566,
+    "plain->encoded recentred": 0.21478260869565216,
+    "encoded->encoded": 1.0,
+    "encoded->base": 0.18956521739130436,
+    "encoded->base recentred": 0.3269565217391304,
+    "encoded->plain": 0.30130434782608695,
+    "encoded->plain recentred": 0.19695652173913045,
+    "encoded->base(enc text)": 0.391304347826087
+   }
+  }
+ },
+ "weight_diff": {
+  "L00.attn": {
+   "norm_plain": 0.20913841197406324,
+   "norm_encoded": 0.4459038919415224,
+   "cosine": 0.31441202027659004,
+   "rel_diff": 2.0506420254484703
+  },
+  "L00.ln": {
+   "norm_plain": 0.008021354165064155,
+   "norm_encoded": 0.01595528129737099,
+   "cosine": 0.5217236608814324,
+   "rel_diff": 1.6973507960223162
+  },
+  "L00.mlp": {
+   "norm_plain": 0.5279007125055527,
+   "norm_encoded": 1.1241666435800657,
+   "cosine": 0.20013196348028855,
+   "rel_diff": 2.163890769139601
+  },
+  "L01.attn": {
+   "norm_plain": 0.18055780766308901,
+   "norm_encoded": 0.39307567198593363,
+   "cosine": 0.2150051264357196,
+   "rel_diff": 2.1916262579472447
+  },
+  "L01.ln": {
+   "norm_plain": 0.006045552863996155,
+   "norm_encoded": 0.013589429748180419,
+   "cosine": 0.32915819479560277,
+   "rel_diff": 2.138455270859712
+  },
+  "L01.mlp": {
+   "norm_plain": 0.521785848963403,
+   "norm_encoded": 1.13370620727078,
+   "cosine": 0.14388800943864027,
+   "rel_diff": 2.257331675281112
+  },
+  "L02.attn": {
+   "norm_plain": 0.2298923026351279,
+   "norm_encoded": 0.4858477146480664,
+   "cosine": 0.17328003362029445,
+   "rel_diff": 2.175758884917698
+  },
+  "L02.ln": {
+   "norm_plain": 0.006607491603283457,
+   "norm_encoded": 0.014990392530333876,
+   "cosine": 0.1840601594036789,
+   "rel_diff": 2.3047408792359807
+  },
+  "L02.mlp": {
+   "norm_plain": 0.5328734989431466,
+   "norm_encoded": 1.235405733029046,
+   "cosine": 0.09336382293126873,
+   "rel_diff": 2.4376220265606188
+  },
+  "L03.attn": {
+   "norm_plain": 0.19162637398347523,
+   "norm_encoded": 0.4432116872613754,
+   "cosine": 0.11745431785132968,
+   "rel_diff": 2.409598348279993
+  },
+  "L03.ln": {
+   "norm_plain": 0.005919152026599968,
+   "norm_encoded": 0.014207171776358824,
+   "cosine": 0.13979115523345637,
+   "rel_diff": 2.4677772215741607
+  },
+  "L03.mlp": {
+   "norm_plain": 0.5142980320057088,
+   "norm_encoded": 1.235688066450482,
+   "cosine": 0.09144509012872322,
+   "rel_diff": 2.516623790628693
+  },
+  "L04.attn": {
+   "norm_plain": 0.17631180540394945,
+   "norm_encoded": 0.443514070366904,
+   "cosine": 0.11651408226513364,
+   "rel_diff": 2.596460058002925
+  },
+  "L04.ln": {
+   "norm_plain": 0.0056079044554014626,
+   "norm_encoded": 0.014838231897829405,
+   "cosine": 0.2047634719247553,
+   "rel_diff": 2.630106686016465
+  },
+  "L04.mlp": {
+   "norm_plain": 0.48676610474426163,
+   "norm_encoded": 1.2334107966947767,
+   "cosine": 0.09580853198534842,
+   "rel_diff": 2.6334486702669198
+  },
+  "L05.attn": {
+   "norm_plain": 0.1776014149307089,
+   "norm_encoded": 0.48179511979239653,
+   "cosine": 0.10311110638138361,
+   "rel_diff": 2.7928096319227658
+  },
+  "L05.ln": {
+   "norm_plain": 0.005395103429726641,
+   "norm_encoded": 0.014218623314184383,
+   "cosine": 0.1702266165523297,
+   "rel_diff": 2.6548895909422137
+  },
+  "L05.mlp": {
+   "norm_plain": 0.4726685136197156,
+   "norm_encoded": 1.2526928862983262,
+   "cosine": 0.10243071642023534,
+   "rel_diff": 2.7351280112245324
+  },
+  "L06.attn": {
+   "norm_plain": 0.17646467305750768,
+   "norm_encoded": 0.46276708547626977,
+   "cosine": 0.13987792238696134,
+   "rel_diff": 2.672736897068316
+  },
+  "L06.ln": {
+   "norm_plain": 0.005653456235047279,
+   "norm_encoded": 0.015297000960975667,
+   "cosine": 0.1909892037910715,
+   "rel_diff": 2.6995719350086524
+  },
+  "L06.mlp": {
+   "norm_plain": 0.4801260726363543,
+   "norm_encoded": 1.2818703196499182,
+   "cosine": 0.10783618311245792,
+   "rel_diff": 2.748153501983583
+  },
+  "L07.attn": {
+   "norm_plain": 0.19057620363085415,
+   "norm_encoded": 0.48831190482226106,
+   "cosine": 0.11140281095029823,
+   "rel_diff": 2.644701802949169
+  },
+  "L07.ln": {
+   "norm_plain": 0.006051033401714822,
+   "norm_encoded": 0.014775767847856926,
+   "cosine": 0.14181004388431245,
+   "rel_diff": 2.504019439838941
+  },
+  "L07.mlp": {
+   "norm_plain": 0.48368301492147786,
+   "norm_encoded": 1.282207026917507,
+   "cosine": 0.10462963904499385,
+   "rel_diff": 2.733618217602728
+  },
+  "L08.attn": {
+   "norm_plain": 0.18162384813267862,
+   "norm_encoded": 0.48175117950169055,
+   "cosine": 0.11742940410775615,
+   "rel_diff": 2.7226134139485727
+  },
+  "L08.ln": {
+   "norm_plain": 0.005958572087287443,
+   "norm_encoded": 0.014635882112988228,
+   "cosine": 0.11294542717448976,
+   "rel_diff": 2.545275941935869
+  },
+  "L08.mlp": {
+   "norm_plain": 0.48286441628788535,
+   "norm_encoded": 1.2625819934997908,
+   "cosine": 0.10641438219284426,
+   "rel_diff": 2.6982495467351337
+  },
+  "L09.attn": {
+   "norm_plain": 0.19282645227558698,
+   "norm_encoded": 0.4866463703818939,
+   "cosine": 0.11627881562303632,
+   "rel_diff": 2.6043064141868064
+  },
+  "L09.ln": {
+   "norm_plain": 0.00570466565030387,
+   "norm_encoded": 0.01449551607049394,
+   "cosine": 0.10932953267335127,
+   "rel_diff": 2.626982022661048
+  },
+  "L09.mlp": {
+   "norm_plain": 0.4916211836259628,
+   "norm_encoded": 1.2887608608709502,
+   "cosine": 0.09436507757952764,
+   "rel_diff": 2.7161109090539375
+  },
+  "L10.attn": {
+   "norm_plain": 0.1756413546488558,
+   "norm_encoded": 0.4672737893012332,
+   "cosine": 0.11000556762309924,
+   "rel_diff": 2.7372137113987054
+  },
+  "L10.ln": {
+   "norm_plain": 0.005707936853213712,
+   "norm_encoded": 0.014704691388813364,
+   "cosine": 0.15623711184991299,
+   "rel_diff": 2.613757582179492
+  },
+  "L10.mlp": {
+   "norm_plain": 0.48684538484295564,
+   "norm_encoded": 1.2334922096445582,
+   "cosine": 0.09527624892865667,
+   "rel_diff": 2.6337337076391227
+  },
+  "L11.attn": {
+   "norm_plain": 0.1850653223583296,
+   "norm_encoded": 0.4697652473366746,
+   "cosine": 0.09243963820545928,
+   "rel_diff": 2.6408438756239434
+  },
+  "L11.ln": {
+   "norm_plain": 0.005714657702658769,
+   "norm_encoded": 0.01500754314257962,
+   "cosine": 0.1554378099166436,
+   "rel_diff": 2.6608745373841756
+  },
+  "L11.mlp": {
+   "norm_plain": 0.5097509287034798,
+   "norm_encoded": 1.2328840619337913,
+   "cosine": 0.09394801328690808,
+   "rel_diff": 2.528870262909198
+  },
+  "L12.attn": {
+   "norm_plain": 0.19186575766509031,
+   "norm_encoded": 0.47973788523030775,
+   "cosine": 0.10442721316572424,
+   "rel_diff": 2.594166357942818
+  },
+  "L12.ln": {
+   "norm_plain": 0.0060218065417439156,
+   "norm_encoded": 0.014806030351403997,
+   "cosine": 0.1250940659372115,
+   "rel_diff": 2.5357906384722213
+  },
+  "L12.mlp": {
+   "norm_plain": 0.5218608654415194,
+   "norm_encoded": 1.2065794139191293,
+   "cosine": 0.09196328173344506,
+   "rel_diff": 2.4331916071626307
+  },
+  "L13.attn": {
+   "norm_plain": 0.20983119212344847,
+   "norm_encoded": 0.5055598263834735,
+   "cosine": 0.09889680677899701,
+   "rel_diff": 2.5156472090227573
+  },
+  "L13.ln": {
+   "norm_plain": 0.006253367063960835,
+   "norm_encoded": 0.014109202543715097,
+   "cosine": 0.10889394400793503,
+   "rel_diff": 2.3662860410762954
+  },
+  "L13.mlp": {
+   "norm_plain": 0.5638980974605347,
+   "norm_encoded": 1.284072813511137,
+   "cosine": 0.1083411106502999,
+   "rel_diff": 2.3857775944442134
+  },
+  "L14.attn": {
+   "norm_plain": 0.20185367729860723,
+   "norm_encoded": 0.4857148547653638,
+   "cosine": 0.09436774239207467,
+   "rel_diff": 2.517140428504337
+  },
+  "L14.ln": {
+   "norm_plain": 0.006690430238070804,
+   "norm_encoded": 0.01569780370254139,
+   "cosine": 0.10914173900762043,
+   "rel_diff": 2.4480598478682603
+  },
+  "L14.mlp": {
+   "norm_plain": 0.596950494525547,
+   "norm_encoded": 1.3355329916166325,
+   "cosine": 0.08746666478662356,
+   "rel_diff": 2.3693792496611548
+  },
+  "L15.attn": {
+   "norm_plain": 0.25155523302512217,
+   "norm_encoded": 0.5181850666039535,
+   "cosine": 0.10639239366638843,
+   "rel_diff": 2.1920248119080465
+  },
+  "L15.ln": {
+   "norm_plain": 0.007959741317993936,
+   "norm_encoded": 0.01593171880454595,
+   "cosine": 0.1322957917816429,
+   "rel_diff": 2.1157885271025183
+  },
+  "L15.mlp": {
+   "norm_plain": 0.610428584007437,
+   "norm_encoded": 1.292177747807264,
+   "cosine": 0.07601917473930539,
+   "rel_diff": 2.2713780285287877
+  },
+  "L16.attn": {
+   "norm_plain": 0.3128093933453168,
+   "norm_encoded": 0.586135943288891,
+   "cosine": 0.09577832340202813,
+   "rel_diff": 2.037674142084528
+  },
+  "L16.ln": {
+   "norm_plain": 0.008828377996663217,
+   "norm_encoded": 0.016172982106863302,
+   "cosine": 0.13411874406722352,
+   "rel_diff": 1.965853474860308
+  },
+  "L16.mlp": {
+   "norm_plain": 0.6731635091705519,
+   "norm_encoded": 1.2616661462358605,
+   "cosine": 0.048242077077796826,
+   "rel_diff": 2.0813264836781484
+  },
+  "L17.attn": {
+   "norm_plain": 0.23250561403184303,
+   "norm_encoded": 0.3908412953644231,
+   "cosine": 0.07826698562818371,
+   "rel_diff": 1.8874899624505481
+  },
+  "L17.ln": {
+   "norm_plain": 0.008393931345209658,
+   "norm_encoded": 0.012782679136613176,
+   "cosine": 0.0881901609924561,
+   "rel_diff": 1.7465579867540015
+  },
+  "L17.mlp": {
+   "norm_plain": 0.7489136935014781,
+   "norm_encoded": 1.2740915526164607,
+   "cosine": 0.04043969444834952,
+   "rel_diff": 1.9382117702739532
+  },
+  "L18.attn": {
+   "norm_plain": 0.234679023250142,
+   "norm_encoded": 0.47880880185929314,
+   "cosine": 0.03222314181287597,
+   "rel_diff": 2.243037611384354
+  },
+  "L18.ln": {
+   "norm_plain": 0.008070203940184956,
+   "norm_encoded": 0.014514533099074469,
+   "cosine": 0.031794865419947645,
+   "rel_diff": 2.0298657118197756
+  },
+  "L18.mlp": {
+   "norm_plain": 0.7417293539950687,
+   "norm_encoded": 1.2991256487824658,
+   "cosine": 0.034653695178481735,
+   "rel_diff": 1.9865292942323771
+  },
+  "L19.attn": {
+   "norm_plain": 0.23933783357101635,
+   "norm_encoded": 0.437155120150904,
+   "cosine": 0.0623100875898807,
+   "rel_diff": 2.026956029858595
+  },
+  "L19.ln": {
+   "norm_plain": 0.008154198491051201,
+   "norm_encoded": 0.013476917024195857,
+   "cosine": 0.0713899518414808,
+   "rel_diff": 1.869660002297252
+  },
+  "L19.mlp": {
+   "norm_plain": 0.723139256078835,
+   "norm_encoded": 1.2882074467955906,
+   "cosine": 0.03865852165450071,
+   "rel_diff": 2.008902128147944
+  },
+  "L20.attn": {
+   "norm_plain": 0.23553274874475288,
+   "norm_encoded": 0.42157750416887285,
+   "cosine": 0.0779378367027296,
+   "rel_diff": 1.9810863107826175
+  },
+  "L20.ln": {
+   "norm_plain": 0.007957987776880688,
+   "norm_encoded": 0.012808237616603432,
+   "cosine": 0.05136374806481925,
+   "rel_diff": 1.8507008841918087
+  },
+  "L20.mlp": {
+   "norm_plain": 0.7058386465553473,
+   "norm_encoded": 1.2368226711929267,
+   "cosine": 0.03199060164379693,
+   "rel_diff": 1.9895605975335733
+  },
+  "L21.attn": {
+   "norm_plain": 0.21845079588468427,
+   "norm_encoded": 0.4342921272121997,
+   "cosine": 0.05980672325119248,
+   "rel_diff": 2.171304462115504
+  },
+  "L21.ln": {
+   "norm_plain": 0.007283634257394469,
+   "norm_encoded": 0.012059632524394296,
+   "cosine": 0.02172931620154792,
+   "rel_diff": 1.9155785784950974
+  },
+  "L21.mlp": {
+   "norm_plain": 0.7086586427257516,
+   "norm_encoded": 1.2275182559875868,
+   "cosine": 0.030907619640739875,
+   "rel_diff": 1.9731556612549501
+  },
+  "L22.attn": {
+   "norm_plain": 0.22233914237767788,
+   "norm_encoded": 0.42143282601223553,
+   "cosine": 0.0546403990520148,
+   "rel_diff": 2.0941815464434312
+  },
+  "L22.ln": {
+   "norm_plain": 0.007358079611399451,
+   "norm_encoded": 0.012549646119906003,
+   "cosine": 0.057618040088239876,
+   "rel_diff": 1.9267570031169647
+  },
+  "L22.mlp": {
+   "norm_plain": 0.6838170477058068,
+   "norm_encoded": 1.1679210334140029,
+   "cosine": 0.038601307075045964,
+   "rel_diff": 1.9455626774603652
+  },
+  "L23.attn": {
+   "norm_plain": 0.22200878895531959,
+   "norm_encoded": 0.3500950111348451,
+   "cosine": 0.07656527487268974,
+   "rel_diff": 1.8014628303376292
+  },
+  "L23.ln": {
+   "norm_plain": 0.00735102902360197,
+   "norm_encoded": 0.00948031477813935,
+   "cosine": 0.12200092282101457,
+   "rel_diff": 1.532494456030165
+  },
+  "L23.mlp": {
+   "norm_plain": 0.6531425314015075,
+   "norm_encoded": 0.9851858417444032,
+   "cosine": 0.07084666561300047,
+   "rel_diff": 1.7497077892494681
+  },
+  "ln_f": {
+   "norm_plain": 0.0052400851801842644,
+   "norm_encoded": 0.005585682764572259,
+   "cosine": 0.1193572427097647,
+   "rel_diff": 1.3717859018943714
+  },
+  "wte (other rows)": {
+   "norm_plain": 0.7964510444376104,
+   "norm_encoded": 2.5780178163384835,
+   "cosine": 0.16348171265332773,
+   "rel_diff": 3.2278569521839384
+  },
+  "wte (slot-word rows)": {
+   "norm_plain": 0.02165164234335298,
+   "norm_encoded": 0.09333763228496855,
+   "cosine": -0.0937818336524276,
+   "rel_diff": 4.515778003266627
+  }
+ },
+ "transplant": {
+  "plain, number rows <- encoded code rows": {
+   "acc": 0.5529411764705883,
+   "chain_exact": 0.27941176470588236,
+   "link_acc": 0.4223101154035076
+  },
+  "encoded, code rows <- plain number rows": {
+   "acc": 0.14705882352941177,
+   "chain_exact": 0.0,
+   "link_acc": 0.13921387525547468
+  },
+  "plain, number rows <- base number rows": {
+   "acc": 1.0,
+   "chain_exact": 1.0,
+   "link_acc": 1.0
+  },
+  "encoded, code rows <- base code rows": {
+   "acc": 1.0,
+   "chain_exact": 1.0,
+   "link_acc": 1.0
+  },
+  "plain, number rows <- base code rows": {
+   "acc": 0.5529411764705883,
+   "chain_exact": 0.27941176470588236,
+   "link_acc": 0.4223101154035076
+  },
+  "plain, untouched": {
+   "acc": 1.0,
+   "chain_exact": 1.0,
+   "link_acc": 1.0
+  },
+  "encoded, untouched": {
+   "acc": 1.0,
+   "chain_exact": 1.0,
+   "link_acc": 1.0
+  }
+ }
+}
