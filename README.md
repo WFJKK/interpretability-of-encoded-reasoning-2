@@ -113,3 +113,11 @@ Circuit. Both models read swap k with the same heads (L5H1, L5H5, L6H9, L7H2, L7
 Residual horizon. With the last m slot words neutralised, the encoded model is at chance already at m = 1 (0.205 for all m): the state does not survive a single step without a token. The plain model gives 0.59, 0.30, then chance, which equals the probability that the ball did not move in the last one or two swaps: it falls back on the last readable number word, and the encoded model does not fall back on the last readable code word.
 
 Reading. Encoded reasoning here is the same computation with a different internal state coding, not the same coding with different output words. A white-box monitor trained on the readable model does not detect the encoded state; one has to be trained on the encoded model, or on both.
+
+## Seed and code controls
+
+Three more GPT-2 fine-tunes (plain seed 1, encoded seed 1, and a second five-word code `well, true, nice, cool, done` as condition encoded_b), compared pairwise with interp_pairs.py (results/interp_pairs.json; models on Hugging Face as cups-organism-gpt2-plain-s1, -encoded-s1, -encoded_b-s0).
+
+At layers 8 to 11, where the state is computed: same code, different seed gives the same representation (plain0~plain1 principal cosines 0.93/0.92 at layers 9 and 10, probe transfer 1.00 from layer 11; enc0~enc1 0.87 to 0.90 from layer 7, transfer 0.99 from layer 10). Different code gives a different representation, whether the other code is the readable one or another arbitrary one (enc0~encB 0.34 to 0.41 first cosine, plain~encoded 0.30 to 0.38, transfer at chance in all these pairs; random baseline 0.10). Plain's state subspace is the base model's number-word subspace (0.87 at layers 9 and 10 for both seeds); the arbitrary codes overlap the base at 0.2 to 0.4. Encoded-trained probes read the plain model partially at layers 11 and 12 (0.45 to 0.65), never the reverse.
+
+Conclusion: the internal state coding is determined by the five words used, reproducibly, and is anchored in those words' pretrained features; it is not a seed effect. Training cost differs too: plain reaches near-zero loss within the first epoch, the codes plateau for about an epoch first (mean training loss 0.04 plain, 0.16 and 0.08 for the two codes).
