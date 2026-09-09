@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Per-link circuit of a GPT-2 organism model, with TransformerLens.
+"""Per-link circuit of an organism model, with TransformerLens (GPT-2 by default; --tag/--base for Qwen).
 
     python interp_circuit.py --user WFJKK --cond encoded --data data/organism \
         --out results/interp_circuit_encoded.json [--n-attn 200 --n-patch 100] [--smoke]
@@ -23,7 +23,7 @@ import time
 import numpy as np
 import torch
 
-from gen_cups import CODE, CUPS, PLAIN
+from gen_cups import CUPS, SLOT_MAPS
 from interp_boundary import completion_positions, repo_id
 from train_cups import describe_device, load_model, load_tokenizer, read_jsonl
 
@@ -44,10 +44,10 @@ def prompt_line_positions(tok, prompt):
     return out
 
 
-def load_tl(user, cond, tok, device):
+def load_tl(user, cond, tok, device, tag="gpt2", base="gpt2"):
     from transformer_lens import HookedTransformer
-    hf = load_model(repo_id(user, cond), torch.float32)
-    model = HookedTransformer.from_pretrained("gpt2", hf_model=hf, tokenizer=tok, device=device)
+    hf = load_model(repo_id(user, cond, tag, base), torch.float32)
+    model = HookedTransformer.from_pretrained(base, hf_model=hf, tokenizer=tok, device=device)
     model.eval()
     return model
 
@@ -79,7 +79,7 @@ def metric(logits, pos, clean_id, corr_id):
 
 @torch.no_grad()
 def patching(model, tok, rows, cond, rng):
-    words = PLAIN if cond == "plain" else CODE
+    words = SLOT_MAPS[cond]
     wid = {s: tok(" " + w, add_special_tokens=False)["input_ids"][0] for s, w in words.items()}
     L, H = model.cfg.n_layers, model.cfg.n_heads
     resid, heads, mlps = np.zeros((L, len(SPAN))), np.zeros((L, H)), np.zeros(L)
@@ -93,8 +93,10 @@ def patching(model, tok, rows, cond, rng):
         a, b = r["swaps"][k - 1]
         s_corr = b if s_corr_prev == a else a if s_corr_prev == b else s_corr_prev
         q = preds[k - 1]
-        span = list(range(slots[k - 2], q + 1))
-        if len(span) != len(SPAN):
+        s0 = slots[k - 2]
+        # position groups: slot word k-1, '.', newline, the index token(s) of line k, ':'
+        groups = [[s0], [s0 + 1], [s0 + 2], list(range(s0 + 3, q)), [q]]
+        if not groups[3]:
             continue
         clean = torch.tensor([ids], device=model.cfg.device)
         corr = clean.clone()
@@ -111,9 +113,9 @@ def patching(model, tok, rows, cond, rng):
 
         for l in range(L):
             name = f"blocks.{l}.hook_resid_pre"
-            for j, pos in enumerate(span):
-                def hook(act, hook, pos=pos, name=name):
-                    act[:, pos] = ccache[name][:, pos]
+            for j, poss in enumerate(groups):
+                def hook(act, hook, poss=poss, name=name):
+                    act[:, poss] = ccache[name][:, poss]
                     return act
                 resid[l, j] += rec(model.run_with_hooks(corr, fwd_hooks=[(name, hook)]))
             zname = f"blocks.{l}.attn.hook_z"
@@ -140,7 +142,9 @@ def top(mat, k=8):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--user", required=True)
-    ap.add_argument("--cond", choices=["plain", "encoded"], required=True)
+    ap.add_argument("--tag", default="gpt2")
+    ap.add_argument("--base", default="gpt2")
+    ap.add_argument("--cond", choices=["plain", "encoded", "encoded_b"], required=True)
     ap.add_argument("--data", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--n-attn", type=int, default=200)
@@ -152,8 +156,8 @@ def main():
         args.n_attn, args.n_patch = 10, 3
 
     device, _ = describe_device()
-    tok = load_tokenizer("gpt2")
-    model = load_tl(args.user, args.cond, tok, device)
+    tok = load_tokenizer(args.base)
+    model = load_tl(args.user, args.cond, tok, device, args.tag, args.base)
     rows = sorted(read_jsonl(os.path.join(args.data, "test.jsonl")), key=lambda r: r["id"])
     rng = random.Random(args.seed)
     t0 = time.time()

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Boundary-relabelling tests on the GPT-2 plain and encoded organism models.
+"""Boundary-relabelling tests on the plain and encoded organism models (GPT-2 by default; --tag/--base for Qwen).
 
     python interp_boundary.py --user WFJKK --data data/organism --out results/interp_boundary.json \
         [--n-instances 500] [--per-n-eval 20] [--smoke]
@@ -20,6 +20,7 @@ import argparse
 import copy
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -35,8 +36,8 @@ from train_cups import describe_device, load_model, load_tokenizer, prompt_ids, 
 CONDS = ("base", "plain", "encoded")
 
 
-def repo_id(user, cond):
-    return "gpt2" if cond == "base" else f"{user}/cups-organism-gpt2-{cond}"
+def repo_id(user, cond, tag="gpt2", base="gpt2"):
+    return base if cond == "base" else f"{user}/cups-organism-{tag}-{cond}"
 
 
 # ---------------------------------------------------------------- positions
@@ -142,13 +143,16 @@ def probe_transfer(acts, device, train_frac=0.8):
 # ---------------------------------------------------------------- weight diff
 
 def block_of(name):
-    if name.startswith("transformer.h."):
-        parts = name.split(".")
-        return f"L{int(parts[2]):02d}." + ("attn" if parts[3] == "attn" else "mlp" if parts[3] == "mlp" else "ln")
-    if "wte" in name:
+    m = re.search(r"\.(?:h|layers)\.(\d+)\.(\w+)", name)
+    if m:
+        kind = m.group(2)
+        return f"L{int(m.group(1)):02d}." + ("attn" if "attn" in kind else "mlp" if kind == "mlp" else "ln")
+    if "wte" in name or "embed_tokens" in name:
         return "wte (other rows)"
     if "wpe" in name:
         return "wpe"
+    if "lm_head" in name:
+        return "lm_head (untied)"
     return "ln_f"
 
 
@@ -157,7 +161,7 @@ def weight_diff(models, word_ids):
     acc = {}
     for (n, pb), (_, pp), (_, pe) in zip(base.named_parameters(), plain.named_parameters(), enc.named_parameters()):
         dp, de = (pp.detach() - pb.detach()).float(), (pe.detach() - pb.detach()).float()
-        if "wte" in n:
+        if "wte" in n or "embed_tokens" in n:
             mask = torch.zeros(dp.shape[0], dtype=torch.bool, device=dp.device)
             mask[word_ids] = True
             pieces = [("wte (slot-word rows)", dp[mask], de[mask]), ("wte (other rows)", dp[~mask], de[~mask])]
@@ -185,8 +189,12 @@ def transplant(recipient, donor, recipient_ids, donor_ids):
     (state-aligned: the recipient's row for state s gets the donor's row for state s)."""
     m = copy.deepcopy(recipient)
     with torch.no_grad():
-        for r_id, d_id in zip(recipient_ids, donor_ids):
-            m.transformer.wte.weight[r_id] = donor.transformer.wte.weight[d_id].to(m.transformer.wte.weight.dtype)
+        pairs = [(m.get_input_embeddings().weight, donor.get_input_embeddings().weight)]
+        if m.get_output_embeddings().weight.data_ptr() != m.get_input_embeddings().weight.data_ptr():  # untied
+            pairs.append((m.get_output_embeddings().weight, donor.get_output_embeddings().weight))
+        for r_mat, d_mat in pairs:
+            for r_id, d_id in zip(recipient_ids, donor_ids):
+                r_mat[r_id] = d_mat[d_id].to(r_mat.dtype)
     return m
 
 
@@ -205,6 +213,8 @@ def run_eval(path, cond, data, out, per_n):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--user", required=True, help="Hugging Face user holding the cups-organism repos")
+    ap.add_argument("--tag", default="gpt2", help="organism tag: gpt2 or qwen2.5-0.5b")
+    ap.add_argument("--base", default="gpt2", help="base model repo: gpt2 or Qwen/Qwen2.5-0.5B")
     ap.add_argument("--data", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--n-instances", type=int, default=500)
@@ -215,9 +225,9 @@ def main():
         args.n_instances, args.per_n_eval = 20, 3
 
     device, _ = describe_device()
-    tok = load_tokenizer("gpt2")
+    tok = load_tokenizer(args.base)
     tok.padding_side = "left"
-    models = {c: load_model(repo_id(args.user, c), torch.float32).to(device).eval() for c in CONDS}
+    models = {c: load_model(repo_id(args.user, c, args.tag, args.base), torch.float32).to(device).eval() for c in CONDS}
     rows = read_jsonl(os.path.join(args.data, "test.jsonl"))
     rows = sorted(rows, key=lambda r: r["id"])[: args.n_instances]
     word_ids = {w: tok(" " + w, add_special_tokens=False)["input_ids"][0] for w in list(PLAIN.values()) + list(CODE.values())}

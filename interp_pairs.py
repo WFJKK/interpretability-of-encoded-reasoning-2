@@ -32,10 +32,11 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--n-instances", type=int, default=300)
     ap.add_argument("--layers", default="6,7,8,9,10,11,12", help="layers to print (all are saved)")
+    ap.add_argument("--tokenizer", default="gpt2", help="tokenizer repo (gpt2 or Qwen/Qwen2.5-0.5B)")
     args = ap.parse_args()
 
     device, _ = describe_device()
-    tok = load_tokenizer("gpt2")
+    tok = load_tokenizer(args.tokenizer)
     rows = sorted(read_jsonl(os.path.join(args.data, "test.jsonl")), key=lambda r: r["id"])[: args.n_instances]
     specs = []
     for sp in args.specs:

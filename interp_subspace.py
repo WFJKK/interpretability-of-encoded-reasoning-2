@@ -26,10 +26,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--user", required=True); ap.add_argument("--data", required=True); ap.add_argument("--out", required=True)
     ap.add_argument("--n-instances", type=int, default=300)
+    ap.add_argument("--tag", default="gpt2"); ap.add_argument("--base", default="gpt2")
     args = ap.parse_args()
     device, _ = describe_device()
-    tok = load_tokenizer("gpt2")
-    models = {c: load_model(repo_id(args.user, c), torch.float32).to(device).eval() for c in CONDS}
+    tok = load_tokenizer(args.base)
+    models = {c: load_model(repo_id(args.user, c, args.tag, args.base), torch.float32).to(device).eval() for c in CONDS}
     rows = sorted(read_jsonl(os.path.join(args.data, "test.jsonl")), key=lambda r: r["id"])[: args.n_instances]
     A = {"plain": collect(models["plain"], tok, rows, "plain", device),
          "encoded": collect(models["encoded"], tok, rows, "encoded", device),
