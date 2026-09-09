@@ -10,8 +10,9 @@
    mean and scale on the target model.
 2. weight diff: per-block norms of (fine-tune minus base) and the cosine between the plain and encoded deltas;
    the ten slot-word rows of the (tied) embedding matrix are reported separately.
-3. row transplant: the plain model with the encoded model's rows for okay..good, evaluated on the encoded
-   task (free generation, chain decoded in the encoded vocabulary), and the reverse.
+3. row transplant (state-aligned): the plain model with its number-word rows replaced by the encoded
+   model's code-word rows for the same states, run on the plain task, and the reverse; controls put the
+   base model's rows back in.
 
 Hidden state l is the residual stream entering block l (l = 0 is the embedding output); l = 12 is after ln_f.
 """
@@ -179,10 +180,13 @@ def weight_diff(models, word_ids):
 
 # ---------------------------------------------------------------- transplant
 
-def transplant(recipient, donor, ids):
+def transplant(recipient, donor, recipient_ids, donor_ids):
+    """Copy of `recipient` whose embedding rows recipient_ids[i] are replaced by the donor's rows donor_ids[i]
+    (state-aligned: the recipient's row for state s gets the donor's row for state s)."""
     m = copy.deepcopy(recipient)
     with torch.no_grad():
-        m.transformer.wte.weight[ids] = donor.transformer.wte.weight[ids].to(m.transformer.wte.weight.dtype)
+        for r_id, d_id in zip(recipient_ids, donor_ids):
+            m.transformer.wte.weight[r_id] = donor.transformer.wte.weight[d_id].to(m.transformer.wte.weight.dtype)
     return m
 
 
@@ -259,16 +263,20 @@ def main():
     code_ids = [word_ids[w] for w in CODE.values()]
     plain_ids = [word_ids[w] for w in PLAIN.values()]
     os.makedirs("runs", exist_ok=True)
+    B, P, E = models["base"], models["plain"], models["encoded"]
     hybrids = {
-        "plain+encoded_code_rows -> encoded task": (transplant(models["plain"], models["encoded"], code_ids), "encoded"),
-        "encoded+plain_number_rows -> plain task": (transplant(models["encoded"], models["plain"], plain_ids), "plain"),
-        "plain (untouched) -> encoded task": (models["plain"], "encoded"),
-        "encoded (untouched) -> plain task": (models["encoded"], "plain"),
+        "plain, number rows <- encoded code rows":  (transplant(P, E, plain_ids, code_ids), "plain"),
+        "encoded, code rows <- plain number rows":  (transplant(E, P, code_ids, plain_ids), "encoded"),
+        "plain, number rows <- base number rows":   (transplant(P, B, plain_ids, plain_ids), "plain"),
+        "encoded, code rows <- base code rows":     (transplant(E, B, code_ids, code_ids), "encoded"),
+        "plain, number rows <- base code rows":     (transplant(P, B, plain_ids, code_ids), "plain"),
+        "plain, untouched":                         (P, "plain"),
+        "encoded, untouched":                       (E, "encoded"),
     }
     results["transplant"] = {}
-    print("\ntransplant (free generation; chain decoded in the task's vocabulary)")
-    for name, (m, cond) in hybrids.items():
-        path = "runs/hybrid-" + name.split(" ")[0].replace("+", "-")
+    print("\ntransplant (state-aligned rows; free generation on the recipient's own task)")
+    for i, (name, (m, cond)) in enumerate(hybrids.items()):
+        path = f"runs/hybrid-{i}"
         m.save_pretrained(path)
         tok.save_pretrained(path)
         res = run_eval(path, cond, args.data, path + "/results.json", args.per_n_eval)
